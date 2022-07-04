@@ -1,10 +1,17 @@
-require('dotenv').config();
 const express = require('express');
 const logger = require('morgan');
+const dotenv = require('dotenv');
 const cors = require('cors');
+const db = require('../db/models');
+const apiRouter = require('./routers');
 
-const apiRouter = require('./routes');
+dotenv.config();
 const app = express();
+
+db.sequelize
+  .sync({ force: true }) // 개발 끝나면 false
+  .then(() => console.log('db connected'))
+  .catch(err => console.error('occurred error in db connecting', err));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -15,7 +22,6 @@ app.use(
     credentials: true,
   }),
 );
-
 app.use('/api', apiRouter);
 
 app.use((req, res, next) => {

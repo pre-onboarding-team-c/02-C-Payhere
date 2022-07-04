@@ -1,17 +1,17 @@
-"use strict";
+'use strict';
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.bulkInsert("Users", [
+    return queryInterface.bulkInsert('Users', [
       {
-        email: "kgeeeu@gmail.com",
-        password: "password1",
+        email: 'kgeeeu@gmail.com',
+        password: 'password1',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        email: "whoamixzerone@gmail.com",
-        password: "password2",
+        email: 'whoamixzerone@gmail.com',
+        password: 'password2',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -19,6 +19,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete("Users", null, {});
+    return queryInterface.bulkDelete('Users', null, {});
   },
 };

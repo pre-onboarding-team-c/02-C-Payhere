@@ -1,5 +1,5 @@
 const express = require('express');
-const morgan = require('morgan');
+const logger = require('morgan');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const db = require('../db/models');
@@ -13,8 +13,7 @@ db.sequelize
   .then(() => console.log('db connected'))
   .catch(err => console.error('occurred error in db connecting', err));
 
-app.set('port', process.env.PORT || 8081);
-app.use(morgan('dev'));
+app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(

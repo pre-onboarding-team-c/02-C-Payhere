@@ -14,10 +14,15 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: new Date(),
         comment: '가계부 기입 날짜',
       },
-      expenses: {
+      type: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        comment: '가계부 소비/지출',
+      },
+      amount: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        comment: '지출',
+        comment: '금액',
       },
       memo: {
         type: DataTypes.STRING,

@@ -1,12 +1,10 @@
 const express = require('express');
+const userRouter = require('./user');
 const accountBookRouter = require('./accountBook.router');
 
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-  res.json({ message: 'OK' });
-});
-
+router.use('/users', userRouter);
 router.use('/accountBooks', accountBookRouter);
 
 module.exports = router;

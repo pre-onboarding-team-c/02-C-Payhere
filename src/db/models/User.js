@@ -1,3 +1,8 @@
+/**
+ * 작성자 - 김지유
+ * Users Model 정의.
+ * Users : AccountBooks = 1 : N
+ */
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define(
     'Users',

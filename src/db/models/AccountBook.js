@@ -1,3 +1,10 @@
+const { Users } = require('./index');
+
+/**
+ * 작성자 - 김지유
+ * AccountBooks Model 정의.
+ * Users : AccountBooks = 1 : N
+ */
 module.exports = (sequelize, DataTypes) => {
   const AccountBooks = sequelize.define(
     'AccountBooks',
@@ -8,6 +15,15 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         comment: '가계부 id',
       },
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: Users,
+          key: 'id',
+        },
+        comment: '사용자 id',
+      },
       date: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -17,6 +33,9 @@ module.exports = (sequelize, DataTypes) => {
       type: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          isIn: [['income', 'expense']],
+        },
         comment: '가계부 소비/지출',
       },
       amount: {
@@ -44,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
 
     AccountBooks.belongsTo(Users, {
       foreignKey: 'userId',
-      sourceKey: 'id',
+      targetKey: 'id',
       onDelete: 'CASCADE',
       hooks: true,
     });

@@ -4,11 +4,11 @@ const { userService } = require('../services');
  * 작성자 : 김영우
  * @returns {json} - 코드, 메시지
  */
-const signIn = async (req, res, next) => {
+const signUp = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    const result = await userService.signInService(email, password, next);
+    const result = await userService.signUpService(email, password);
     if (result) {
       return res
         .status(400)
@@ -23,5 +23,5 @@ const signIn = async (req, res, next) => {
 };
 
 module.exports = {
-  signIn,
+  signUp,
 };

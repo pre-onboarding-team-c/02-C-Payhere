@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
  * @param {string} password - 사용자 비밀번호
  * @returns {null | Error} - 성공 | 실패
  */
-const signInService = async (email, password) => {
+const signUpService = async (email, password) => {
   try {
     const user = await Users.findOne({ where: { email } });
     if (user) {
@@ -29,5 +29,5 @@ const signInService = async (email, password) => {
 };
 
 module.exports = {
-  signInService,
+  signUpService,
 };

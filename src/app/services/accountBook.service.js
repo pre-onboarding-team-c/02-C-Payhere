@@ -1,10 +1,25 @@
 const { AccountBooks } = require('../../db/models');
 
+// @ts-check
+
+/**
+ * @typedef {Object} AccountBook
+ * @property {number} [id] - 가계부 id
+ * @property {number} userId - 가계부의 사용자 id
+ * @property {Date} [date] - 해당 소비/지출 일시
+ * @property {'income' | 'expense'} type - 가계부 타입. 소비/지출
+ * @property {number} amount - 금액
+ * @property {string | null} [memo] - 메모
+ * @property {Date} [updatedAt] - 업데이트 일시
+ * @property {Date} [createdAt] - 생성 일시
+ * @property {Date} [deletedAt] - 삭제 일시
+ */
+
 // 가계부 작성
 /**
  * 작성자 - 김지유
- * @param {{ userId: number, date?: Date, type: 'income' | 'expense', amount: number, memo?: string }} body
- * @returns {{ date: Date, id: number, userId: number, type: 'income' | 'expense', amount: number, memo: string | null, updatedAt: Date, createdAt: Date }} - 생성된 AccountBook
+ * @param {AccountBook} body - 생성을 원하는 AccountBook 정보
+ * @returns {AccountBook} 생성된 AccountBook
  */
 const createAccountBook = async body => {
   try {
@@ -71,7 +86,7 @@ const restoreAccountBook = async accountBookId => {
 // 가계부 리스트
 /**
  * 작성자 - 김지유
- * @returns {Array<{ id: number, userId: number, date: Date, type: 'income' | 'expense', amount: number, memo: string | null, createdAt: Date, updatedAt: Date, deletedAt: Date | null }>} 가계부 리스트
+ * @returns {Array<AccountBook>} 가계부 리스트
  */
 const getAccountBooks = async () => {
   try {
@@ -87,7 +102,7 @@ const getAccountBooks = async () => {
 /**
  * 작성자 - 김지유
  * @param {number} accountBookId - 상세내역을 확인하고 싶은 accountBookId
- * @returns {{ id: number, userId: number, date: Date, type: 'income' | 'expense', amount: number, memo: string | null, createdAt: Date, updatedAt: Date, deletedAt: Date | null }} 가계부 상세 내역
+ * @returns {AccountBook} 가계부 상세 내역
  */
 const getAccountBook = async accountBookId => {
   try {

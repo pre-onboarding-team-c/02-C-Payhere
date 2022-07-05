@@ -3,13 +3,13 @@ const logger = require('morgan');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const db = require('../db/models');
-const apiRouter = require('./routers');
+const apiRouter = require('./routes');
 
 dotenv.config();
 const app = express();
 
 db.sequelize
-  .sync({ force: true }) // 개발 끝나면 false
+  .sync({ force: false }) // 개발 끝나면 false
   .then(() => console.log('db connected'))
   .catch(err => console.error('occurred error in db connecting', err));
 

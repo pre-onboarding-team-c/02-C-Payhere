@@ -1,3 +1,5 @@
+const { Users } = require('./index');
+
 module.exports = (sequelize, DataTypes) => {
   const AccountBooks = sequelize.define(
     'AccountBooks',
@@ -8,6 +10,16 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         comment: '가계부 id',
       },
+      userId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        unique: true,
+        references: {
+          model: Users,
+          key: 'id',
+        },
+        comment: '사용자 id',
+      },
       date: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -17,6 +29,9 @@ module.exports = (sequelize, DataTypes) => {
       type: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          isIn: [['income', 'expense']],
+        },
         comment: '가계부 소비/지출',
       },
       amount: {

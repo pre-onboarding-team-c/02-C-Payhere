@@ -3,7 +3,9 @@ const { AccountBooks } = require('../../db/models');
 // 가계부 작성
 const createAccountBook = async body => {
   try {
-    await AccountBooks.create(body);
+    const accountBook = await AccountBooks.create(body);
+
+    return accountBook;
   } catch (err) {
     throw new Error(err);
   }
@@ -51,7 +53,9 @@ const restoreAccountBook = async accountBookId => {
 // 가계부 리스트
 const getAccountBooks = async () => {
   try {
-    await AccountBooks.findAll();
+    const accountBooks = await AccountBooks.findAll();
+
+    return accountBooks;
   } catch (err) {
     throw new Error(err);
   }
@@ -60,7 +64,11 @@ const getAccountBooks = async () => {
 // 가계부 상세내역
 const getAccountBook = async accountBookId => {
   try {
-    await AccountBooks.findByPk(accountBookId);
+    const { dataValues: accountBook } = await AccountBooks.findByPk(
+      accountBookId,
+    );
+
+    return accountBook;
   } catch (err) {
     throw new Error(err);
   }

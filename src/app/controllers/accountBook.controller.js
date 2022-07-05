@@ -1,52 +1,64 @@
 const { accountBookServices } = require('../services');
 
 // 가계부 작성
-const createAccountBook = (req, res, next) => {
+const createAccountBook = async (req, res, next) => {
   const { body } = req;
 
-  accountBookServices.createAccountBook(body);
+  const accountBook = await accountBookServices.createAccountBook(body);
+
+  res.status(201).json(accountBook);
 };
 
 // 가계부 수정
-const updateAccountBook = (req, res, next) => {
+const updateAccountBook = async (req, res, next) => {
   const {
     body,
     params: { accountBookId },
   } = req;
 
-  accountBookServices.updateAccountBook(body, accountBookId);
+  await accountBookServices.updateAccountBook(body, accountBookId);
+
+  res.status(201);
 };
 
 // 가계부 삭제
-const deleteAccountBook = (req, res, next) => {
+const deleteAccountBook = async (req, res, next) => {
   const {
     params: { accountBookId },
   } = req;
 
-  accountBookServices.deleteAccountBook(accountBookId);
+  await accountBookServices.deleteAccountBook(accountBookId);
+
+  res.status(204);
 };
 
 // 가계부 복구
-const restoreAccountBook = (req, res, next) => {
+const restoreAccountBook = async (req, res, next) => {
   const {
     params: { accountBookId },
   } = req;
 
-  accountBookServices.restoreAccountBook(accountBookId);
+  await accountBookServices.restoreAccountBook(accountBookId);
+
+  res.status(201);
 };
 
 // 가계부 리스트
-const getAccountBooks = (req, res, next) => {
-  accountBookServices.getAccountBooks();
+const getAccountBooks = async (req, res, next) => {
+  const accountBooks = await accountBookServices.getAccountBooks();
+
+  res.status(200).json(accountBooks);
 };
 
 // 가계부 상세내역
-const getAccountBook = (req, res, next) => {
+const getAccountBook = async (req, res, next) => {
   const {
     params: { accountBookId },
   } = req;
 
-  accountBookServices.getAccountBook(accountBookId);
+  const accountBook = await accountBookServices.getAccountBook(accountBookId);
+
+  res.status(200).json(accountBook);
 };
 
 module.exports = {

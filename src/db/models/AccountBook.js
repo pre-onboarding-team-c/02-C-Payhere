@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
 
     AccountBooks.belongsTo(Users, {
       foreignKey: 'userId',
-      sourceKey: 'id',
+      targetKey: 'id',
       onDelete: 'CASCADE',
       hooks: true,
     });

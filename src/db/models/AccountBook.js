@@ -1,5 +1,10 @@
 const { Users } = require('./index');
 
+/**
+ * 작성자 - 김지유
+ * AccountBooks Model 정의.
+ * Users : AccountBooks = 1 : N
+ */
 module.exports = (sequelize, DataTypes) => {
   const AccountBooks = sequelize.define(
     'AccountBooks',
@@ -13,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        unique: true,
         references: {
           model: Users,
           key: 'id',

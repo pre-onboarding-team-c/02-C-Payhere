@@ -1,5 +1,3 @@
-const { Users } = require('./index');
-
 /**
  * 작성자 - 김지유
  * AccountBooks Model 정의.
@@ -19,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: Users,
+          model: 'Users',
           key: 'id',
         },
         comment: '사용자 id',

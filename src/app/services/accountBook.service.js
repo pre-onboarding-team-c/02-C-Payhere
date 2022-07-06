@@ -106,9 +106,7 @@ const getAccountBooks = async () => {
  */
 const getAccountBook = async accountBookId => {
   try {
-    const { dataValues: accountBook } = await AccountBooks.findByPk(
-      accountBookId,
-    );
+    const accountBook = await AccountBooks.findByPk(accountBookId);
 
     return accountBook;
   } catch (err) {

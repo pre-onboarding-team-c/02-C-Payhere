@@ -9,9 +9,9 @@ const signUp = async (req, res, next) => {
 
   try {
     const result = await userService.signUpService(email, password);
-    if (result) {
+    if (result instanceof Error) {
       return res
-        .status(400)
+        .status(result.status)
         .json({ code: result.status, message: result.message });
     }
 
@@ -37,7 +37,7 @@ const signIn = async (req, res, next) => {
         .json({ code: result.status, message: result.message });
     }
 
-    return res.status(200).json({ email: result.email });
+    return res.status(200).json({ access_token: result });
   } catch (err) {
     console.error(err);
     return next(err);

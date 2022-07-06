@@ -19,7 +19,10 @@ const signUpService = async (email, password) => {
       return error;
     }
 
-    const hashPassword = await bcrypt.hash(password, process.env.SALT_ROUNDS);
+    const hashPassword = await bcrypt.hash(
+      password,
+      Number(process.env.SALT_ROUNDS),
+    );
     await Users.create({ email, password: hashPassword });
 
     return null;
@@ -62,7 +65,31 @@ const signInService = async (email, password) => {
   }
 };
 
+/**
+ * 작성자 : 김영우
+ * 토큰 만료 시 재발급
+ * @param {Integer} id : 사용자 아이디
+ * @returns {string} : 토큰 문자열
+ */
+const getNewAccessToken = async id => {
+  try {
+    const user = await Users.findOne({ where: { id } });
+    if (!user) {
+      const error = new Error('가입되어 있지 않은 사용자 입니다');
+      error.status = 404;
+      return error;
+    }
+
+    const token = await generateAccessToken(user);
+    return token;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};
+
 module.exports = {
   signUpService,
   signInService,
+  getNewAccessToken,
 };

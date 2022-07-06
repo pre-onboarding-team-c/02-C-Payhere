@@ -19,7 +19,7 @@ const signUpService = async (email, password) => {
       return error;
     }
 
-    const hashPassword = await bcrypt.hash(password, 12);
+    const hashPassword = await bcrypt.hash(password, process.env.SALT_ROUNDS);
     await Users.create({ email, password: hashPassword });
 
     return null;
@@ -36,7 +36,7 @@ const signUpService = async (email, password) => {
  * @typedef {Users} - 사용자 Entity
  * @property {string} email - 사용자 이메일
  * @property {string} password - 사용자 비밀번호
- * @returns {id | Error} - 사용자 id | 에러
+ * @returns {string | Error} - 토큰 문자열 | 에러
  */
 const signInService = async (email, password) => {
   try {

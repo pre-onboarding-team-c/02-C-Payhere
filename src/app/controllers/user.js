@@ -2,7 +2,7 @@ const { userService } = require('../services');
 
 /**
  * 작성자 : 김영우
- * @returns {status, json} - 상태코드, 메시지
+ * @returns {json} - 상태코드, 메시지
  */
 const signUp = async (req, res, next) => {
   const { email, password } = req.body;
@@ -24,7 +24,7 @@ const signUp = async (req, res, next) => {
 
 /**
  * 작성자 : 김영우
- * @returns {status, json} - 상태코드, 사용자 정보
+ * @returns {json} - access_token, 사용자 정보
  */
 const signIn = async (req, res, next) => {
   const { email, password } = req.body;

@@ -13,7 +13,10 @@ const createAccountBook = async (req, res, next) => {
 
     const result = await accountBookServices.createAccountBook(userId, body);
 
-    res.status(201).json({ code: 201, message: '기록 완료되었습니다.', data: result });
+    res
+      .location(`/api/accountBooks/${result.id}`)
+      .status(201)
+      .json({ code: 201, message: '기록 완료되었습니다.', data: result });
   } catch (err) {
     err.status = err.status || 400;
 
@@ -37,8 +40,8 @@ const updateAccountBook = async (req, res, next) => {
 
     const result = await accountBookServices.updateAccountBook(userId, body, accountBookId);
 
-    res.status(201).json({
-      code: 201,
+    res.status(200).json({
+      code: 200,
       message: '수정 완료되었습니다.',
       data: { userId, accountBookId, updated: body, isUpdated: true, updatedRows: result },
     });
@@ -64,10 +67,16 @@ const deleteAccountBook = async (req, res, next) => {
 
     const result = await accountBookServices.deleteAccountBook(userId, accountBookId);
 
-    res.status(204).json({
-      code: 204,
+    res.status(200).json({
+      code: 200,
       message: '삭제 완료되었습니다.',
-      data: { userId, accountBookId, isDeleted: true, destroyedRows: result },
+      data: {
+        userId,
+        accountBookId,
+        isDeleted: true,
+        destroyedRows: result,
+        canRestoreHere: `/api/accountBooks/restore/${accountBookId}`,
+      },
     });
   } catch (err) {
     err.status = err.status || 400;
@@ -91,8 +100,8 @@ const restoreAccountBook = async (req, res, next) => {
 
     const result = await accountBookServices.restoreAccountBook(userId, accountBookId);
 
-    res.status(201).json({
-      code: 201,
+    res.status(200).json({
+      code: 200,
       message: '복구 완료되었습니다.',
       data: { userId, accountBookId, isRestored: true, restored: result },
     });

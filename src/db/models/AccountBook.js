@@ -8,13 +8,13 @@ module.exports = (sequelize, DataTypes) => {
     'AccountBooks',
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUIDV4,
         autoIncrement: true,
         primaryKey: true,
         comment: '가계부 id',
       },
       userId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUIDV4,
         allowNull: false,
         references: {
           model: 'Users',

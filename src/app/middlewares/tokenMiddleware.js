@@ -9,16 +9,16 @@ const isVerifyToken = async (req, res, next) => {
   let { authorization: token } = req.headers;
 
   if (!token) {
-    return res
-      .status(401)
-      .json({ code: 401, message: '헤더에 토큰이 존재하지 않습니다' });
+    const error = new Error('헤더에 토큰이 존재하지 않습니다');
+    error.status = 401;
+    return next(error);
   }
   if (token.startsWith('Bearer ')) {
     token = token.substring(7);
   } else {
-    return res
-      .status(401)
-      .json({ code: 401, message: '토큰 타입이 유효하지 않습니다' });
+    const error = new Error('토큰 타입이 유효하지 않습니다');
+    error.status = 401;
+    return next(error);
   }
 
   try {
@@ -28,9 +28,9 @@ const isVerifyToken = async (req, res, next) => {
   } catch (err) {
     console.error(err);
     if (err.name === 'TokenExpiredError') {
-      return res
-        .status(419)
-        .json({ code: 419, message: '토큰이 만료되었습니다' });
+      const error = new Error('토큰이 만료되었습니다');
+      error.status = 419;
+      return next(error);
     }
     if (err.name === 'JsonWebTokenError') {
       let msg = '';
@@ -42,7 +42,9 @@ const isVerifyToken = async (req, res, next) => {
         msg = '유효하지 않은 서명입니다';
       }
 
-      return res.status(401).json({ code: 401, message: msg });
+      const error = new Error(msg);
+      error.status = 401;
+      return next(error);
     }
 
     return next(err);

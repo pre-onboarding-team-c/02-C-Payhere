@@ -15,7 +15,7 @@ const signUpService = async (email, password) => {
     const user = await Users.findOne({ where: { email } });
     if (user) {
       const error = new Error('가입되어 있는 사용자 입니다');
-      error.status = 400;
+      error.status = 409;
       return error;
     }
 

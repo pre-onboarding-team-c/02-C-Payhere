@@ -1,6 +1,9 @@
 const { accountBookServices } = require('../services');
 
-// 가계부 작성
+/**
+ * 작성자 - 김지유
+ * 가계부 작성
+ */
 const createAccountBook = async (req, res, next) => {
   try {
     const {
@@ -20,7 +23,10 @@ const createAccountBook = async (req, res, next) => {
   }
 };
 
-// 가계부 수정
+/**
+ * 작성자 - 김지유
+ * 가계부 수정
+ */
 const updateAccountBook = async (req, res, next) => {
   try {
     const {
@@ -45,7 +51,10 @@ const updateAccountBook = async (req, res, next) => {
   }
 };
 
-// 가계부 삭제
+/**
+ * 작성자 - 김지유
+ * 가계부 삭제
+ */
 const deleteAccountBook = async (req, res, next) => {
   try {
     const {
@@ -69,7 +78,10 @@ const deleteAccountBook = async (req, res, next) => {
   }
 };
 
-// 가계부 복구
+/**
+ * 작성자 - 김지유
+ * 가계부 복구
+ */
 const restoreAccountBook = async (req, res, next) => {
   try {
     const {
@@ -93,7 +105,10 @@ const restoreAccountBook = async (req, res, next) => {
   }
 };
 
-// 가계부 리스트
+/**
+ * 작성자 - 김지유
+ * 가계부 리스트
+ */
 const getAccountBooks = async (req, res, next) => {
   try {
     const {
@@ -112,7 +127,10 @@ const getAccountBooks = async (req, res, next) => {
   }
 };
 
-// 가계부 상세내역
+/**
+ * 작성자 - 김지유
+ * 가계부 상세내역
+ */
 const getAccountBook = async (req, res, next) => {
   try {
     const {

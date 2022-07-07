@@ -3,6 +3,7 @@ const { AccountBooks } = require('../../db/models');
 // @ts-check
 
 /**
+ * 작성자 - 김지유
  * @typedef {Object} AccountBook
  * @property {number} [id] - 가계부 id
  * @property {number} userId - 가계부의 사용자 id

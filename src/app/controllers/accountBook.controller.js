@@ -29,9 +29,13 @@ const updateAccountBook = async (req, res, next) => {
       decodedToken: { id: userId },
     } = req;
 
-    await accountBookServices.updateAccountBook(userId, body, accountBookId);
+    const result = await accountBookServices.updateAccountBook(userId, body, accountBookId);
 
-    res.status(201).json({ code: 201, message: '수정 완료되었습니다.', data: null });
+    res.status(201).json({
+      code: 201,
+      message: '수정 완료되었습니다.',
+      data: { userId, accountBookId, updated: body, isUpdated: true, updatedRows: result },
+    });
   } catch (err) {
     err.status = err.status || 400;
 
@@ -49,9 +53,13 @@ const deleteAccountBook = async (req, res, next) => {
       decodedToken: { id: userId },
     } = req;
 
-    await accountBookServices.deleteAccountBook(userId, accountBookId);
+    const result = await accountBookServices.deleteAccountBook(userId, accountBookId);
 
-    res.status(204).json({ code: 204, message: '삭제 완료되었습니다.', data: null });
+    res.status(204).json({
+      code: 204,
+      message: '삭제 완료되었습니다.',
+      data: { userId, accountBookId, isDeleted: true, destroyedRows: result },
+    });
   } catch (err) {
     err.status = err.status || 400;
 
@@ -69,9 +77,13 @@ const restoreAccountBook = async (req, res, next) => {
       decodedToken: { id: userId },
     } = req;
 
-    await accountBookServices.restoreAccountBook(userId, accountBookId);
+    const result = await accountBookServices.restoreAccountBook(userId, accountBookId);
 
-    res.status(201).json({ code: 201, message: '복구 완료되었습니다.', data: null });
+    res.status(201).json({
+      code: 201,
+      message: '복구 완료되었습니다.',
+      data: { userId, accountBookId, isRestored: true, restored: result },
+    });
   } catch (err) {
     err.status = err.status || 400;
 

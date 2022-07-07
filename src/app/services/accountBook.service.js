@@ -43,14 +43,14 @@ const createAccountBook = async (userId, body) => {
  */
 const updateAccountBook = async (userId, body, accountBookId) => {
   try {
-    const [affectedRow] = await AccountBooks.update(body, {
+    const [updatedRows] = await AccountBooks.update(body, {
       where: {
         userId,
         id: accountBookId,
       },
     });
 
-    if (affectedRow === 0) {
+    if (updatedRows === 0) {
       const error = Error(
         '해당 유저의 가계부 기록이 아니거나, 존재하지 않는 userId, 혹은 accountBookId 입니다.',
       );
@@ -59,6 +59,8 @@ const updateAccountBook = async (userId, body, accountBookId) => {
 
       throw error;
     }
+
+    return updatedRows;
   } catch (err) {
     throw err;
   }
@@ -72,14 +74,14 @@ const updateAccountBook = async (userId, body, accountBookId) => {
  */
 const deleteAccountBook = async (userId, accountBookId) => {
   try {
-    const [destroyedRow] = await AccountBooks.destroy({
+    const [destroyedRows] = await AccountBooks.destroy({
       where: {
         userId,
         id: accountBookId,
       },
     });
 
-    if (destroyedRow === 0) {
+    if (destroyedRows === 0) {
       const error = Error(
         '해당 유저의 가계부 기록이 아니거나, 존재하지 않는 userId, 혹은 accountBookId 입니다.',
       );
@@ -88,6 +90,8 @@ const deleteAccountBook = async (userId, accountBookId) => {
 
       throw error;
     }
+
+    return destroyedRows;
   } catch (err) {
     throw err;
   }
@@ -119,6 +123,8 @@ const restoreAccountBook = async (userId, accountBookId) => {
         id: accountBookId,
       },
     });
+
+    return accountBook;
   } catch (err) {
     throw err;
   }

@@ -10,9 +10,7 @@ const signUp = async (req, res, next) => {
   try {
     const result = await userService.signUpService(email, password);
     if (result instanceof Error) {
-      return res
-        .status(result.status)
-        .json({ code: result.status, message: result.message });
+      return next(result);
     }
 
     return res.status(201).json({ code: 201, message: '회원가입 되었습니다' });
@@ -32,9 +30,7 @@ const signIn = async (req, res, next) => {
   try {
     const result = await userService.signInService(email, password);
     if (result instanceof Error) {
-      return res
-        .status(result.status)
-        .json({ code: result.status, message: result.message });
+      return next(result);
     }
 
     return res.status(200).json({ access_token: result });
@@ -54,9 +50,7 @@ const getAccessToken = async (req, res, next) => {
   try {
     const result = await userService.getNewAccessToken(userId);
     if (result instanceof Error) {
-      return res
-        .status(result.status)
-        .json({ code: result.status, message: result.message });
+      return next(result);
     }
 
     return res.status(200).json({ access_token: result });

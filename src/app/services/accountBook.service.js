@@ -28,13 +28,14 @@ const createAccountBook = async (userId, body) => {
 
     return accountBook;
   } catch (err) {
-    throw new Error(err);
+    err.status = 400;
+
+    throw err;
   }
 };
 
 // 가계부 수정
 /**
- * userId 와 accountBookId 가 일치하지 않을때 에러처리
  * 작성자 - 김지유
  * @param {string} userId
  * @param {{ date?: Date, type?: 'income' | 'expense', amount?: number, memo?: string }} body
@@ -42,46 +43,76 @@ const createAccountBook = async (userId, body) => {
  */
 const updateAccountBook = async (userId, body, accountBookId) => {
   try {
-    await AccountBooks.update(body, {
+    const [affectedRow] = await AccountBooks.update(body, {
       where: {
         userId,
         id: accountBookId,
       },
     });
+
+    if (affectedRow === 0) {
+      const error = Error(
+        '해당 유저의 가계부 기록이 아니거나, 존재하지 않는 userId, 혹은 accountBookId 입니다.',
+      );
+
+      error.status = 404;
+
+      throw error;
+    }
   } catch (err) {
-    throw new Error(err);
+    throw err;
   }
 };
 
 // 가계부 삭제
 /**
- * userId 와 accountBookId 가 일치하지 않을때 에러처리
  * 작성자 - 김지유
  * @param {string} userId
  * @param {number} accountBookId - 삭제하고 싶은 accountBookId
  */
 const deleteAccountBook = async (userId, accountBookId) => {
   try {
-    await AccountBooks.destroy({
+    const [destroyedRow] = await AccountBooks.destroy({
       where: {
         userId,
         id: accountBookId,
       },
     });
+
+    if (destroyedRow === 0) {
+      const error = Error(
+        '해당 유저의 가계부 기록이 아니거나, 존재하지 않는 userId, 혹은 accountBookId 입니다.',
+      );
+
+      error.status = 404;
+
+      throw error;
+    }
   } catch (err) {
-    throw new Error(err);
+    throw err;
   }
 };
 
 // 가계부 복구
 /**
- * userId 와 accountBookId 가 일치하지 않을때 에러처리
  * 작성자 - 김지유
  * @param {string} userId
  * @param {number} accountBookId - 삭제하고 싶은 accountBookId
  */
 const restoreAccountBook = async (userId, accountBookId) => {
   try {
+    const accountBook = await AccountBooks.findByPk(accountBookId, { paranoid: false });
+
+    if (accountBook.userId !== userId) {
+      const error = Error(
+        '해당 유저의 가계부 기록이 아니거나, 존재하지 않는 userId, 혹은 accountBookId 입니다.',
+      );
+
+      error.status = 404;
+
+      throw error;
+    }
+
     await AccountBooks.restore({
       where: {
         userId,
@@ -89,7 +120,7 @@ const restoreAccountBook = async (userId, accountBookId) => {
       },
     });
   } catch (err) {
-    throw new Error(err);
+    throw err;
   }
 };
 
@@ -109,25 +140,42 @@ const getAccountBooks = async userId => {
 
     return accountBooks;
   } catch (err) {
-    throw new Error(err);
+    err.status = 400;
+
+    throw err;
   }
 };
 
 // 가계부 상세내역
 /**
- * userId 와 accountBookId 가 일치하지 않을때 에러처리
  * 작성자 - 김지유
  * @param {string} userId
  * @param {number} accountBookId - 상세내역을 확인하고 싶은 accountBookId
  * @returns {AccountBook} 가계부 상세 내역
  */
-const getAccountBook = async accountBookId => {
+const getAccountBook = async (userId, accountBookId) => {
   try {
     const accountBook = await AccountBooks.findByPk(accountBookId);
 
+    if (!accountBook) {
+      const error = Error('존재하지 않는 accountBookId 입니다.');
+
+      error.status = 404;
+
+      throw error;
+    }
+
+    if (accountBook.userId !== userId) {
+      const error = Error('해당 유저의 가계부 기록이 아니거나, 존재하지 않는 userId 입니다.');
+
+      error.status = 404;
+
+      throw error;
+    }
+
     return accountBook;
   } catch (err) {
-    throw new Error(err);
+    throw err;
   }
 };
 

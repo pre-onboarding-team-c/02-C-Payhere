@@ -1,5 +1,8 @@
 const Joi = require('joi');
 
+/**
+ * 작성자 - 김지유
+ */
 const createAccountBookDTO = Joi.object().keys({
   date: Joi.date(),
   type: Joi.string().valid('income', 'expense').required(),
@@ -7,6 +10,9 @@ const createAccountBookDTO = Joi.object().keys({
   memo: Joi.string(),
 });
 
+/**
+ * 작성자 - 김지유
+ */
 const updateAccountBookDTO = Joi.object().keys({
   date: Joi.date(),
   type: Joi.string().valid('income', 'expense'),
@@ -14,6 +20,9 @@ const updateAccountBookDTO = Joi.object().keys({
   memo: Joi.string(),
 });
 
+/**
+ * 작성자 - 김지유
+ */
 const accountBookIdDTO = Joi.string().guid({ version: 'uuidv4' }).required();
 
 module.exports = {

@@ -7,6 +7,9 @@ const options = {
   abortEarly: false,
 };
 
+/**
+ * 작성자 - 김지유
+ */
 const createAccountBookValidator = async (req, res, next) => {
   const { body } = req;
 
@@ -19,6 +22,9 @@ const createAccountBookValidator = async (req, res, next) => {
   next();
 };
 
+/**
+ * 작성자 - 김지유
+ */
 const updateAccountBookValidator = async (req, res, next) => {
   const {
     body,
@@ -35,6 +41,9 @@ const updateAccountBookValidator = async (req, res, next) => {
   next();
 };
 
+/**
+ * 작성자 - 김지유
+ */
 const accountBookIdValidator = async (req, res, next) => {
   const {
     params: { accountBookId },

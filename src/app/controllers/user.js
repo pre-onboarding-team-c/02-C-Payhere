@@ -22,7 +22,7 @@ const signUp = async (req, res, next) => {
 
 /**
  * 작성자 : 김영우
- * @returns {json} - access_token | 상태코드, 메시지
+ * @returns {json} - access_token, refresh_token | 상태코드, 메시지
  */
 const signIn = async (req, res, next) => {
   const { email, password } = req.body;
@@ -33,27 +33,7 @@ const signIn = async (req, res, next) => {
       return next(result);
     }
 
-    return res.status(200).json({ access_token: result });
-  } catch (err) {
-    console.error(err);
-    return next(err);
-  }
-};
-
-/**
- * 작성자 : 김영우
- * @returns {json} : access_token | 상태코드, 메시지
- */
-const getAccessToken = async (req, res, next) => {
-  const userId = req.params.id;
-
-  try {
-    const result = await userService.getNewAccessToken(userId);
-    if (result instanceof Error) {
-      return next(result);
-    }
-
-    return res.status(200).json({ access_token: result });
+    return res.status(200).json(result);
   } catch (err) {
     console.error(err);
     return next(err);
@@ -63,5 +43,4 @@ const getAccessToken = async (req, res, next) => {
 module.exports = {
   signUp,
   signIn,
-  getAccessToken,
 };

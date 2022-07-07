@@ -3,7 +3,7 @@ const Joi = require('joi');
 /**
  * 작성자 - 김지유
  */
-const createAccountBookDTO = Joi.object().keys({
+const createAccountBookSchema = Joi.object().keys({
   date: Joi.date(),
   type: Joi.string().valid('income', 'expense').required(),
   amount: Joi.number().required(),
@@ -13,7 +13,7 @@ const createAccountBookDTO = Joi.object().keys({
 /**
  * 작성자 - 김지유
  */
-const updateAccountBookDTO = Joi.object().keys({
+const updateAccountBookSchema = Joi.object().keys({
   date: Joi.date(),
   type: Joi.string().valid('income', 'expense'),
   amount: Joi.number(),
@@ -23,10 +23,10 @@ const updateAccountBookDTO = Joi.object().keys({
 /**
  * 작성자 - 김지유
  */
-const accountBookIdDTO = Joi.string().guid({ version: 'uuidv4' }).required();
+const accountBookIdSchema = Joi.string().guid({ version: 'uuidv4' }).required();
 
 module.exports = {
-  createAccountBookDTO,
-  updateAccountBookDTO,
-  accountBookIdDTO,
+  createAccountBookSchema,
+  updateAccountBookSchema,
+  accountBookIdSchema,
 };

@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const {
-  accountBookDTO: { createAccountBookDTO, updateAccountBookDTO, accountBookIdDTO },
-} = require('../../dto');
+  accountBookSchema: { createAccountBookSchema, updateAccountBookSchema, accountBookIdSchema },
+} = require('../../schemas');
 
 const options = {
   abortEarly: false,
@@ -14,7 +14,7 @@ const createAccountBookValidator = async (req, res, next) => {
   const { body } = req;
 
   try {
-    await createAccountBookDTO.validateAsync(body, options);
+    await createAccountBookSchema.validateAsync(body, options);
   } catch (err) {
     res.status(400).json({ code: 400, message: err.message });
   }
@@ -32,8 +32,8 @@ const updateAccountBookValidator = async (req, res, next) => {
   } = req;
 
   try {
-    await updateAccountBookDTO.validateAsync(body, options);
-    await accountBookIdDTO.validateAsync(accountBookId, options);
+    await updateAccountBookSchema.validateAsync(body, options);
+    await accountBookIdSchema.validateAsync(accountBookId, options);
   } catch (err) {
     res.status(400).json({ code: 400, message: err.message });
   }
@@ -50,7 +50,7 @@ const accountBookIdValidator = async (req, res, next) => {
   } = req;
 
   try {
-    await accountBookIdDTO.validateAsync(accountBookId, options);
+    await accountBookIdSchema.validateAsync(accountBookId, options);
   } catch (err) {
     res.status(400).json({ code: 400, message: err.message });
   }

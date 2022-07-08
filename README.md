@@ -51,7 +51,7 @@ https://documenter.getpostman.com/view/21440012/UzJMrFXk
   * - [x] 로그인
 
 ### 공통
-* - [ ] 테스트 케이스(일부만 구현)
+* - [x] 테스트 케이스(일부만 구현)
 
 # 구현 과정
 * 사용자 API

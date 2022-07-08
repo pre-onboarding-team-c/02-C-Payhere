@@ -10,7 +10,7 @@ const {
 const router = express.Router();
 
 router.use('/auth', authRouter);
-router.use('/users', userValidators, userRouter);
+router.use('/users', userValidators.signUserValidator, userRouter);
 router.use('/accountBooks', isVerifyToken, accountBookRouter);
 
 module.exports = router;

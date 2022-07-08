@@ -60,8 +60,6 @@ const updateAccountBook = async (userId, body, accountBookId) => {
 
       throw error;
     }
-
-    return updatedRows;
   } catch (err) {
     throw err;
   }
@@ -75,7 +73,7 @@ const updateAccountBook = async (userId, body, accountBookId) => {
  */
 const deleteAccountBook = async (userId, accountBookId) => {
   try {
-    const [destroyedRows] = await AccountBooks.destroy({
+    const destroyedRows = await AccountBooks.destroy({
       where: {
         userId,
         id: accountBookId,
@@ -91,8 +89,6 @@ const deleteAccountBook = async (userId, accountBookId) => {
 
       throw error;
     }
-
-    return destroyedRows;
   } catch (err) {
     throw err;
   }

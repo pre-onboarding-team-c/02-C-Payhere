@@ -36,13 +36,16 @@ const updateAccountBook = async (req, res, next) => {
       decodedToken: { id: userId },
     } = req;
 
-    const result = await accountBookServices.updateAccountBook(userId, body, accountBookId);
+    await accountBookServices.updateAccountBook(userId, body, accountBookId);
 
-    res.status(200).json({
-      code: 200,
-      message: '수정 완료되었습니다.',
-      data: { userId, accountBookId, updated: body, isUpdated: true, updatedRows: result },
-    });
+    res
+      .location(`/api/accountBooks/${accountBookId}`)
+      .status(200)
+      .json({
+        code: 200,
+        message: '수정 완료되었습니다.',
+        data: { id: accountBookId, ...body },
+      });
   } catch (err) {
     err.status = err.status || 400;
 
@@ -61,18 +64,11 @@ const deleteAccountBook = async (req, res, next) => {
       decodedToken: { id: userId },
     } = req;
 
-    const result = await accountBookServices.deleteAccountBook(userId, accountBookId);
+    await accountBookServices.deleteAccountBook(userId, accountBookId);
 
-    res.status(200).json({
-      code: 200,
+    res.location(`/api/accountBooks/restore/${accountBookId}`).status(200).json({
+      code: 204,
       message: '삭제 완료되었습니다.',
-      data: {
-        userId,
-        accountBookId,
-        isDeleted: true,
-        destroyedRows: result,
-        canRestoreHere: `/api/accountBooks/restore/${accountBookId}`,
-      },
     });
   } catch (err) {
     err.status = err.status || 400;
@@ -94,10 +90,10 @@ const restoreAccountBook = async (req, res, next) => {
 
     const result = await accountBookServices.restoreAccountBook(userId, accountBookId);
 
-    res.status(200).json({
+    res.location(`/api/accountBooks/${accountBookId}`).status(200).json({
       code: 200,
       message: '복구 완료되었습니다.',
-      data: { userId, accountBookId, isRestored: true, restored: result },
+      data: result,
     });
   } catch (err) {
     err.status = err.status || 400;
@@ -134,6 +130,7 @@ const getAccountBook = async (req, res, next) => {
   try {
     const {
       params: { accountBookId },
+      decodedToken: { id: userId },
     } = req;
 
     const result = await accountBookServices.getAccountBook(userId, accountBookId);

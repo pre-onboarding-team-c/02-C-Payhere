@@ -12,7 +12,6 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install
-RUN npm install -g sequelize-cli
 # 프로덕션을 위한 코드를 빌드하는 경우
 # RUN npm ci --only=production
 

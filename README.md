@@ -30,6 +30,7 @@ API 링크 https://documenter.getpostman.com/view/21440012/UzJMrFXk
 
 # 프로젝트 담당 역할
 ### 김지유
+* - [x] Api Documentation
 * - [x] Docker
 * - [x] DB 모델링
 * - [x] 타입 검증 미들웨어

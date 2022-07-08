@@ -1,4 +1,3 @@
-const Joi = require('joi');
 const {
   accountBookSchema: { createAccountBookSchema, updateAccountBookSchema, accountBookIdSchema },
 } = require('../../schemas');
@@ -16,7 +15,8 @@ const createAccountBookValidator = async (req, res, next) => {
   try {
     await createAccountBookSchema.validateAsync(body, options);
   } catch (err) {
-    res.status(400).json({ code: 400, message: err.message });
+    res.status(400);
+    res.json({ code: 400, message: err.message });
   }
 
   next();
@@ -35,7 +35,8 @@ const updateAccountBookValidator = async (req, res, next) => {
     await updateAccountBookSchema.validateAsync(body, options);
     await accountBookIdSchema.validateAsync(accountBookId, options);
   } catch (err) {
-    res.status(400).json({ code: 400, message: err.message });
+    res.status(400);
+    res.json({ code: 400, message: err.message });
   }
 
   next();
@@ -52,7 +53,8 @@ const accountBookIdValidator = async (req, res, next) => {
   try {
     await accountBookIdSchema.validateAsync(accountBookId, options);
   } catch (err) {
-    res.status(400).json({ code: 400, message: err.message });
+    res.status(400);
+    res.json({ code: 400, message: err.message });
   }
 
   next();

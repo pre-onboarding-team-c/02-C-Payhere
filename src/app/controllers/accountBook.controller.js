@@ -20,9 +20,7 @@ const createAccountBook = async (req, res, next) => {
   } catch (err) {
     err.status = err.status || 400;
 
-    const { status, message } = err;
-
-    res.status(status).json({ code: status, message, data: null });
+    next(err);
   }
 };
 
@@ -48,9 +46,7 @@ const updateAccountBook = async (req, res, next) => {
   } catch (err) {
     err.status = err.status || 400;
 
-    const { status, message } = err;
-
-    res.status(status).json({ code: status, message, data: null });
+    next(err);
   }
 };
 
@@ -81,9 +77,7 @@ const deleteAccountBook = async (req, res, next) => {
   } catch (err) {
     err.status = err.status || 400;
 
-    const { status, message } = err;
-
-    res.status(status).json({ code: status, message, data: null });
+    next(err);
   }
 };
 
@@ -108,9 +102,7 @@ const restoreAccountBook = async (req, res, next) => {
   } catch (err) {
     err.status = err.status || 400;
 
-    const { status, message } = err;
-
-    res.status(status).json({ code: status, message, data: null });
+    next(err);
   }
 };
 
@@ -130,9 +122,7 @@ const getAccountBooks = async (req, res, next) => {
   } catch (err) {
     err.status = err.status || 400;
 
-    const { status, message } = err;
-
-    res.status(status).json({ code: status, message, data: null });
+    next(err);
   }
 };
 
@@ -152,9 +142,7 @@ const getAccountBook = async (req, res, next) => {
   } catch (err) {
     err.status = err.status || 400;
 
-    const { status, message } = err;
-
-    res.status(status).json({ code: status, message, data: null });
+    next(err);
   }
 };
 

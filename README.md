@@ -95,6 +95,10 @@ $ npm run start:prod
 $ (sudo) docker-compose build
 $ (sudo) docker-compose up -d
 ```
+### Docker 종료하기
+```
+$ (sudo) docker-compose down
+```
 ### 테스트 실행하기
 ```
 $ npm test

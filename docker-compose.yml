@@ -1,0 +1,36 @@
+version: '3.8'
+
+networks:
+  app-tier:
+    driver: bridge
+services:
+  mysql:
+    networks:
+      - app-tier
+    image: mysql
+    container_name: mysql
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_USER: team-c
+      MYSQL_PASSWORD: team-c/payhere
+      MYSQL_ROOT_PASSWORD: team-c/payhere
+      MYSQL_DATABASE: nodejs_prod
+      TZ: Asia/Seoul
+  app:
+    networks:
+      - app-tier
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules # Remove this if you have pure JS dependencies
+    restart: always
+    ports:
+      - '3000:8081'
+    links:
+      - mysql
+    depends_on:
+      - mysql

@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     'Users',
     {
       id: {
-        type: DataTypes.UUIDV4,
-        autoIncrement: true,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
         comment: '사용자 id',
       },
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         comment: '사용자 비밀번호',
       },
       token: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(507),
         allowNull: true,
         comment: 'Refresh Token',
       },

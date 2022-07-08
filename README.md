@@ -23,7 +23,7 @@
   * 가계부에서 상세한 세부 내역을 볼 수 있다
 
 # API Documentation
-API 링크 https://documenter.getpostman.com/view/21440012/UzJMrFXk
+https://documenter.getpostman.com/view/21440012/UzJMrFXk
 
 # DB Modeling
 <img width="1140" alt="ERD" src="https://user-images.githubusercontent.com/79984416/177918370-dd930910-ace8-484d-81bc-3b6deedd6b41.png">

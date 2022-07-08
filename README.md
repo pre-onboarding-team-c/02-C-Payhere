@@ -92,8 +92,8 @@ $ npm run start:prod
 ```
 ### Docker 실행하기
 ```
-$ (sudo) docker compose build
-$ (sudo) docker compose up
+$ (sudo) docker-compose build
+$ (sudo) docker-compose up -d
 ```
 ### 테스트 실행하기
 ```

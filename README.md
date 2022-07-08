@@ -48,9 +48,14 @@ $ npm test
 # API Documentation
 API 링크
 
+# DB Modeling
+<img width="1140" alt="ERD" src="https://user-images.githubusercontent.com/79984416/177918370-dd930910-ace8-484d-81bc-3b6deedd6b41.png">
+
 # 프로젝트 담당 역할
 ### 김지유
+* - [ ] Docker
 * - [ ] DB 모델링
+* - [ ] 타입 검증 미들웨어
 * - [ ] 가계부 CRUD
   * - [ ] 가계부 등록
   * - [ ] 가계부 수정
@@ -62,13 +67,10 @@ API 링크
 * - [ ] README.md 작성
 * - [ ] 접근 제한 처리
 * - [ ] 토큰 인증 제어
-
-### 황시우
 * - [ ] 프로젝트 초기화, lint, formatting
 * - [ ] 회원가입
 * - [ ] 로그인
 * - [ ] 로그아웃
 
 ### 공통
-* - [ ] Docker 서버 실행
 * - [ ] 테스트 케이스

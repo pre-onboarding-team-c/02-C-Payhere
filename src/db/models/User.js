@@ -27,6 +27,11 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         comment: '사용자 비밀번호',
       },
+      token: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        comment: 'Refresh Token',
+      },
     },
     {
       charset: 'utf8', // 한국어 설정

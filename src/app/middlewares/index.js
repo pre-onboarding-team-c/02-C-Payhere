@@ -1,7 +1,8 @@
 const validators = require('./validators');
-const isVerifyToken = require('./tokenMiddleware');
+const { isVerifyToken, isVerifyRefresh } = require('./tokenMiddleware');
 
 module.exports = {
   validators,
   isVerifyToken,
+  isVerifyRefresh,
 };
